@@ -1,26 +1,25 @@
 version: '3'
 
 services:
-  # bdc-bdc_geoserver-geoserver:
-  #   build: ./
-  #   container_name: bdc-bdc_geoserver-geoserver
-  #   environment:
-  #     - bdc_geoserver_SERVICE_DATACUBE=http://127.0.0.1:5030
-  #     - bdc_geoserver_SERVICE_LAMBDA_DATACUBE=http://127.0.0.1:5040
-  #     - ENVIRONMENT=prod
-  #     - KEYSYSTEM=Key#2019@BDC#hash
-  #   volumes:
-  #     - "./:/usr/src/app"
-  #   working_dir: "/usr/src/app"
-  #   ports:
-  #     - "5015:5000"
-  #   restart: always
-  #   networks:
-  #     - bdc
-
   bdc-geoserver:
-    hostname: bdc-geoserver
+    build: ./
     container_name: bdc-geoserver
+    environment:
+      - URL_GEOSERVER=geoserver:8080
+      - ENVIRONMENT=DevelopmentConfig
+      - KEYSYSTEM=Key#2019@Geoserver#hash
+    volumes:
+      - "./:/usr/src/app"
+    working_dir: "/usr/src/app"
+    ports:
+      - "5015:5000"
+    restart: always
+    networks:
+      - bdc_net_geoserver
+
+  geoserver:
+    hostname: geoserver
+    container_name: geoserver
     image: kartoza/geoserver
     environment:
       - GEOSERVER_ADMIN_PASSWORD=geoserver
@@ -30,8 +29,8 @@ services:
     ports:
       - "8081:8080"
     networks:
-      - bdc
+      - bdc_net_geoserver
 
 networks:
-  bdc:
+  bdc_net_geoserver:
     driver: bridge
