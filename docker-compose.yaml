@@ -8,12 +8,18 @@ services:
       - URL_GEOSERVER=geoserver:8080
       - ENVIRONMENT=DevelopmentConfig
       - KEYSYSTEM=Key#2019@Geoserver#hash
-      - PATH_GEOSERVER=file:///home/data/cubes
+      - PATH_BASE_GEOSERVER=file:///home/data/cubes
+      - PATH_CUBES_FILE=/home/bdc/files,
+      - POSTGRES_DATABASE=bdc,
+      - POSTGRES_USER=postgres,
+      - POSTGRES_PASSWORD=postgres,
+      - POSTGRES_HOST=127.0.0.1,
+      - POSTGRES_PORT=5433
     volumes:
       - "./:/usr/src/app"
     working_dir: "/usr/src/app"
     ports:
-      - "5015:5000"
+      - "5000:5000"
     restart: always
     networks:
       - bdc_net_geoserver
@@ -32,6 +38,24 @@ services:
     networks:
       - bdc_net_geoserver
 
+  postgis:
+    hostname: postgis
+    container_name: postgis
+    image: kartoza/postgis
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASS=postgres
+      - POSTGRES_DBNAME=bdc
+    volumes:
+      - postgres-data:/var/lib/postgresql
+    ports:
+      - "54321:5432"
+    networks:
+      - bdc_net_geoserver
+
 networks:
   bdc_net_geoserver:
     driver: bridge
+
+volumes:
+  postgres-data:

@@ -9,7 +9,7 @@ class Config():
     DEBUG = False
     TESTING = False
     DEVELOPMENT = False
-    SECRET_KEY = os.environ.get('POSTGRES_USER', 'bdc_geoserver-Users-123456')
+    SECRET_KEY = os.environ.get('KEYSYSTEM', 'bdc_geoserver')
     SQLALCHEMY_DATABASE_URI = 'postgresql://{}:{}@{}:{}/{}'.format(
         os.environ.get('POSTGRES_USER'), os.environ.get('POSTGRES_PASSWORD'), os.environ.get('POSTGRES_HOST'),
         os.environ.get('POSTGRES_PORT'), os.environ.get('POSTGRES_DATABASE'))
