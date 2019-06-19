@@ -3,7 +3,7 @@ from flask import request
 from flask_restplus import Resource, marshal
 
 from bdc_geoserver.coverages import ns
-from bdc_geoserver.coverages.business import GeoserverBusiness
+from bdc_geoserver.coverages.business import CoverageBusiness
 from bdc_geoserver.coverages.parsers import validate
 from bdc_geoserver.coverages.utils import return_response
 
@@ -52,7 +52,7 @@ class CoverageController(Resource):
             }, 500)
             
 
-@bdc_geoserver.route('/coverage')
+@bdc_geoserver.route('/')
 class CoverageController(Resource):
 
     def post(self):

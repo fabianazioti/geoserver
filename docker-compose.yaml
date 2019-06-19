@@ -8,6 +8,7 @@ services:
       - URL_GEOSERVER=geoserver:8080
       - ENVIRONMENT=DevelopmentConfig
       - KEYSYSTEM=Key#2019@Geoserver#hash
+      - PATH_GEOSERVER=file:///home/data/cubes
     volumes:
       - "./:/usr/src/app"
     working_dir: "/usr/src/app"

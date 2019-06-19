@@ -1,51 +1,41 @@
 import jwt
 import json
+import os
+import shutil
+from pathlib import Path
 from copy import deepcopy
 
 from bdc_geoserver.coverages.services import CoverageServices
 from bdc_geoserver.coverages.utils import replaceList
+from bdc_geoserver.utils.base_sql import db
 
 class CoverageBusiness():
 
     @classmethod
     def get_coverages(cls, workspace, datastore):
-        layers = CoverageServices.get_coverages(workspace, datastore).content
-        return json.loads(layers)
+        coverages = CoverageServices.get_coverages(workspace, datastore).content
+        return json.loads(coverages)
 
     @classmethod
     def publish(cls, data):
         datastore = replaceList(data['datastore'], ['.', '-', '_', '.', '~', '@', '!', '/'], '')
-        layer = replaceList(data['layer'], ['.', '-', '_', '.', '~', '@', '!', '/'], '')    
+        layer = replaceList(data['layer'], ['.', '-', '_', '.', '~', '@', '!', '/'], '')
 
         '''
-            1) Criando tabela do mosaico no banco
-            -> fid serial primary key,
-            -> the_geom geometry(Type, Proj) not null,
-            -> location varchar(255) not null, (path file)
-            -> timestamp timestamp
-
-            2) Criando indice espacial
-            -> create index spatial_index_name on table using gist(the_geom);
-        '''
-        # TODO:       
-
-        '''
-            Inserindo as informações das features na tabela criada acima
-            -> varre os arquivos, pegando (PATH, GEOMETRY, DATE)
-        '''
-        # TODO:
-
-        '''
-            Criar os arquivos de configurações para leitura do geoserver
-            -> layer.properties
+            Copiar arquivos listados (.properties) para dentro da pasta do mosaico
+            -> indexer.properties
             -> datastore.properties
+            -> timeregex.properties
         '''
-        # TODO:
+        properties_path = Path('{}/properties_files/'.format(os.path.dirname(__file__)))
+        datacube_path = Path('{}/{}/'.format(os.environ.get('PATH_CUBES_FILE'), layer))
+        for filename in os.listdir(properties_path):
+            shutil.copy2('{}/{}'.format(properties_path, filename), '{}/{}'.format(datacube_path, filename))
 
         ''' 
             Criando coverageStore
         '''
-        path = 'file://{}'.format(data['path'])
+        path = '{}{}'.format(os.environ.get('PATH_BASE_GEOSERVER'), data['path'])
         result_create = CoverageServices.create_coveragestore(data['workspace'], datastore, layer, path)
         if not result_create:
             return False
@@ -83,14 +73,20 @@ class CoverageBusiness():
     def unpublish(cls, workspace, datastore, layer):
         ''' Despublicando e removendo uma coverage '''
         
-        try:
-            unpublish = CoverageServices.unpublish(workspace, layer)
-            if not unpublish:
-                raise Exception('Error unpublish layer')
-        except Exception as e:
-            pass
+        unpublish = CoverageServices.unpublish(workspace, layer)
+        if not unpublish:
+            raise Exception('Error unpublish layer')
 
         remove = CoverageServices.remove(workspace, datastore, layer)
         if not remove:
             raise Exception('Error remove layer')
+        
+        ''' Removendo arquivos de configuração '''
+        datacube_path = Path('{}/{}/'.format(os.environ.get('PATH_CUBES_FILE'), layer))
+        for filename in os.listdir(datacube_path):
+            if filename.find('.properties') > 0 or filename.find('.dat') > 0:
+                os.remove('{}/{}'.format(datacube_path, filename))
+
+        ''' excluindo tabela do banco - gerado pelo geoserver '''
+        db.engine.execute('DROP TABLE IF EXISTS {}'.format(layer))
         return True

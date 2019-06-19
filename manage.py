@@ -7,7 +7,7 @@ from bdc_geoserver import create_app
 from bdc_geoserver.blueprint import blueprint
 from bdc_geoserver.config import get_settings
 
-app = create_app(get_settings(os.environ.get('ENVIRONMENT', 'DevelopmentConfig')))
+app, db = create_app(get_settings(os.environ.get('ENVIRONMENT', 'DevelopmentConfig')))
 app.register_blueprint(blueprint)
 
 manager = Manager(app)

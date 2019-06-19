@@ -4,7 +4,7 @@ import re
 import requests
 from requests.auth import HTTPBasicAuth
 
-class GeoserverServices():
+class CoverageServices():
     
     @classmethod
     def get_base_url(cls, content_type='application/json'):
