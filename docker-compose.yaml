@@ -9,11 +9,11 @@ services:
       - ENVIRONMENT=DevelopmentConfig
       - KEYSYSTEM=Key#2019@Geoserver#hash
       - PATH_BASE_GEOSERVER=file:///home/data/cubes
-      - PATH_CUBES_FILE=/home/bdc/files,
-      - POSTGRES_DATABASE=bdc,
-      - POSTGRES_USER=postgres,
-      - POSTGRES_PASSWORD=postgres,
-      - POSTGRES_HOST=127.0.0.1,
+      - PATH_CUBES_FILE=/home/bdc/files
+      - POSTGRES_DATABASE=bdc
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_HOST=127.0.0.1
       - POSTGRES_PORT=5433
     volumes:
       - "./:/usr/src/app"
