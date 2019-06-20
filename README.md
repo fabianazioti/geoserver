@@ -40,7 +40,6 @@ pip3 install -r requirements.txt
   - POSTGRES_PORT = port database
 
 ```
-pip3 install -r requirements.txt
 python3 manager.py run
 ```
 
