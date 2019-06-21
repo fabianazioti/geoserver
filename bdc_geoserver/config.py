@@ -16,7 +16,7 @@ class Config():
 
 
 class ProductionConfig(Config):
-    
+    DEVELOPMENT = False
 
 class DevelopmentConfig(Config):
     DEVELOPMENT = True

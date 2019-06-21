@@ -65,6 +65,7 @@ instance/
 
 # Sphinx documentation
 docs/_build/
+/spec/node_modules
 
 # PyBuilder
 target/
@@ -106,4 +107,6 @@ venv.bak/
 # debug
 .vscode
 
-/spec/node_modules
+# local test
+cubes_files/
+/bdc_geoserver/coverages/properties_files/datastore.properties
