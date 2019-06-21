@@ -12,8 +12,8 @@ from bdc_geoserver.utils.base_sql import db
 class CoverageBusiness():
 
     @classmethod
-    def get_coverages(cls, workspace, datastore):
-        coverages = CoverageServices.get_coverages(workspace, datastore).content
+    def get_coverages(cls, workspace):
+        coverages = CoverageServices.get_coverages(workspace).content
         return json.loads(coverages)
 
     @classmethod
@@ -87,6 +87,9 @@ class CoverageBusiness():
             if filename.find('.properties') > 0 or filename.find('.dat') > 0:
                 os.remove('{}/{}'.format(datacube_path, filename))
 
-        ''' excluindo tabela do banco - gerado pelo geoserver '''
+        ''' Excluindo tabela do banco - gerado pelo geoserver '''
         db.engine.execute('DROP TABLE IF EXISTS {}'.format(layer))
+
+        ''' Removendo coverage store '''
+        # TODO:
         return True

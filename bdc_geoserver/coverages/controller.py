@@ -9,16 +9,16 @@ from bdc_geoserver.coverages.utils import return_response
 
 bdc_geoserver = ns
 
-@bdc_geoserver.route('/<workspace>/<datastore>')
-@bdc_geoserver.route('/<workspace>/<datastore>/<layer>')
+@bdc_geoserver.route('/<workspace>')
+@bdc_geoserver.route('/<workspace>/<coveragestore>/<coverage>')
 class CoverageController(Resource):
 
-    def get(self, workspace, datastore, layer=None):
+    def get(self, workspace, coveragestore=None, coverage=None):
         try:
             """
-            Endpoint responsável listar as layers de um workspace
+            Endpoint responsável listar as coverage store de um workspace
             """
-            layers = CoverageBusiness.get_coverages(workspace, datastore)
+            layers = CoverageBusiness.get_coverages(workspace)
 
             return return_response({
                 "success": True,
@@ -31,12 +31,12 @@ class CoverageController(Resource):
                 "message": str(e)
             }, 500)
     
-    def delete(self, workspace, datastore, layer):
+    def delete(self, workspace, coveragestore, coverage):
         try:
             """
             Endpoint responsável despublicar um layer
             """
-            status = CoverageBusiness.unpublish(workspace, datastore, layer)
+            status = CoverageBusiness.unpublish(workspace, coveragestore, coverage)
             if not status:
                 raise Exception('Error unpublish mosaic!')
 
@@ -71,7 +71,7 @@ class CoverageController(Resource):
             return return_response({
                 "success": True,
                 "message": "Mosaic published!"
-            }, 200)
+            }, 201)
 
         except Exception as e:
             return return_response({
