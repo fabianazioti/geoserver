@@ -22,7 +22,7 @@ class CoverageController(Resource):
 
             return return_response({
                 "success": True,
-                "coverages": layers['coverages']
+                "coverageStore": layers['coverageStores']['coverageStore']
             }, 200)
 
         except Exception as e:

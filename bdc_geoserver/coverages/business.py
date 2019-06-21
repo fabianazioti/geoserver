@@ -89,7 +89,4 @@ class CoverageBusiness():
 
         ''' Excluindo tabela do banco - gerado pelo geoserver '''
         db.engine.execute('DROP TABLE IF EXISTS {}'.format(layer))
-
-        ''' Removendo coverage store '''
-        # TODO:
         return True

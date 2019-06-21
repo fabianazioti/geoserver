@@ -20,9 +20,9 @@ class CoverageServices():
 
 
     @classmethod
-    def get_coverages(cls, workspace, datastore):
+    def get_coverages(cls, workspace):
         base_url, headers, auth = cls.get_base_url()
-        base_url += '/rest/workspaces/{}/coveragestores/{}/coverages.json'.format(workspace, datastore)
+        base_url += '/rest/workspaces/{}/coveragestores.json'.format(workspace)
         r = requests.get(base_url, headers=headers, verify=False, auth=auth)
         if r and r.status_code in (200, 201):
             return r
@@ -66,9 +66,9 @@ class CoverageServices():
 
 
     @classmethod
-    def remove(cls, workspace, datastore, layer):
-        base_url, headers, auth = cls.get_base_url(content_type='text/xml')
-        base_url += '/rest/workspaces/{}/coveragestores/{}/coverages/{}.xml'.format(workspace, datastore, layer)
+    def remove(cls, workspace, coverage_store, layer):
+        base_url, headers, auth = cls.get_base_url(content_type='text/plain')
+        base_url += '/rest/workspaces/{}/coveragestores/{}?recurse=true'.format(workspace, coverage_store)
 
         r = requests.delete(base_url, headers=headers, verify=False, auth=auth)
         if r and r.status_code in (200, 201):
