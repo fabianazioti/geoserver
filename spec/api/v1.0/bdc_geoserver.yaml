@@ -114,13 +114,19 @@ components:
       properties:
         workspace: 
           type: string
+          description: 'datacube'
         datastore:
           type: string
+          description: 'brazilsentinel'
         layer:
           type: string
+          description: 'brazil'
         path:
           type: string
+          description: '/brazil'
         description:
           type: string
+          description: 'brazil data cube with sentinel'
         projection:
           type: string
+          description: 'EPSG:4326'
