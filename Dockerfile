@@ -1,9 +1,9 @@
-FROM python:3.6.8-jessie
+FROM ubuntu:18.04
 
 ENV APP_DIR /usr/src/app
 
 RUN	apt-get update && \
-    apt-get install -y curl libssl-dev libffi-dev locales locales-all nano git && \
+    apt-get install -y python3-pip curl libssl-dev locales locales-all nano git && \
     pip3 install --upgrade pip && \
     rm -rf /var/cache/apk/*
 
@@ -18,4 +18,4 @@ EXPOSE 5000
 
 RUN pip3 install -r requirements.txt
 
-ENTRYPOINT python3 manage.py
+ENTRYPOINT python3 manage.py run
