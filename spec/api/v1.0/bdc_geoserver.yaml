@@ -1,0 +1,122 @@
+openapi: 3.0.0
+
+info:
+  description: Web service to publish layers and cubes in Geoserver - Brazil Data Cube
+  version: "1.0"
+  title: API publish cubes in Geoserver
+  contact:
+    name: Brazil Data Cube
+    email: example@example.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+tags:
+  - name: "coverages"
+    description: "Manager coverages (mosaicPyramid) in Geoserver"
+    
+paths:
+  /coverages/{workspace}:
+    get:
+      tags:
+        - "coverages"
+      summary: "List Cubes"
+      description: "return list de cubes/layers published"
+      parameters:
+        - in: "path"
+          name: "workspace"
+          required: true
+          description: "Name of Workspace"
+      responses:
+        200:
+          description: Coverages Published
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  coverages:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/CoverageStore"
+
+  /coverages/{workspace}/{coveragestore}/{coverage}:
+    delete:
+      tags:
+        - "coverages"
+      summary: "Unpublish"
+      description: "Unpublish and remove cube/layer"
+      parameters:
+        - in: "path"
+          name: "workspace"
+          required: true
+          description: "Name of Workspace"
+        - in: "path"
+          name: "coveragestore"
+          required: true
+          description: "Name of Coverage Store"
+        - in: "path"
+          name: "coverage"
+          required: true
+          description: "Name of Data Cube (coverage)"
+      responses:
+        200:
+          description: Depublization status
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseStatus"
+  
+  /coverages/:
+    post:
+      tags:
+        - "coverages"
+      summary: "Publish"
+      description: "Create coverage store and publish cube"
+      requestBody:
+        description: "Initial informations to publish datacube"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CoverageRequest"
+      responses:
+        201:
+          description: Publication status
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseStatus"
+
+
+components:
+  schemas:
+    ResponseStatus:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+    
+    CoverageStore:
+      type: object
+      properties:
+        name:
+          type: string
+          
+    CoverageRequest:
+      type: object
+      properties:
+        workspace: 
+          type: string
+        datastore:
+          type: string
+        layer:
+          type: string
+        path:
+          type: string
+        description:
+          type: string
+        projection:
+          type: string
