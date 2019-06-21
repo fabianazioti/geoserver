@@ -14,7 +14,7 @@ Execute the following command to install `node modules` dependencies:
 npm install
 ```
 
-After that, generate WTSS documentation:
+After that, generate BDC_Geoserver documentation:
 
 ```bash
 npm run build
@@ -47,7 +47,7 @@ docker build --network=host --tag redoc-cli .
 exit
 ```
 
-After that, execute the following commands (**Make sure** you are in `bdc_geoserver/spec` folder):
+After that, execute the following commands (**Make sure** you are in `geoserver/spec` folder):
 
 ```bash
 docker run --rm \
