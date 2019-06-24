@@ -5,7 +5,9 @@ services:
     build: ./
     container_name: bdc-geoserver
     environment:
-      - URL_GEOSERVER=geoserver:8080
+      - GEOSERVER_URL=geoserver:8080
+      - GEOSERVER_USER=admin
+      - GEOSERVER_PASSWORD=geoserver
       - ENVIRONMENT=DevelopmentConfig
       - KEYSYSTEM=Key#2019@Geoserver#hash
       - PATH_BASE_GEOSERVER=file:///home/data/cubes
@@ -13,10 +15,10 @@ services:
       - POSTGRES_DATABASE=bdc
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-      - POSTGRES_HOST=127.0.0.1
-      - POSTGRES_PORT=5433
+      - POSTGRES_HOST=postgis
+      - POSTGRES_PORT=5432
     volumes:
-      - ./cubes_files:/data/bdc/files
+      - ./files:/data/bdc/files
     ports:
       - "5000:5000"
     restart: always
@@ -29,9 +31,11 @@ services:
     image: kartoza/geoserver
     environment:
       - GEOSERVER_ADMIN_PASSWORD=geoserver
+      - INITIAL_MEMORY=2G
+      - MAXIMUM_MEMORY=4G
     volumes:
       - geoserver-data:/opt/geoserver/data_dir
-      - ./cubes_files:/home/data/cubes
+      - ./files:/home/data/cubes
     ports:
       - "8081:8080"
     networks:

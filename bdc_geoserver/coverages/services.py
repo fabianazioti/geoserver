@@ -11,10 +11,10 @@ class CoverageServices():
         headers = {
             "content-type": content_type
         }
-        base_url = os.environ.get('URL_GEOSERVER', 'http://localhost:8081/geoserver')
+        base_url = os.environ.get('GEOSERVER_URL', 'http://localhost:8081/geoserver')
         auth = HTTPBasicAuth(
-            os.environ.get('USER_GEOSERVER', 'admin'),
-            os.environ.get('PASSWORD_GEOSERVER', 'geoserver')
+            os.environ.get('GEOSERVER_USER', 'admin'),
+            os.environ.get('GEOSERVER_PASSWORD', 'geoserver')
         )
         return '{}'.format(base_url), headers, auth
 

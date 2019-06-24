@@ -108,5 +108,5 @@ venv.bak/
 .vscode
 
 # local test
-cubes_files/
+files/
 /bdc_geoserver/coverages/properties_files/datastore.properties

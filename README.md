@@ -25,10 +25,12 @@ pip3 install -r requirements.txt
 
 ## Running
 
-- copy files with cubes to folder `.files/`
+- copy files with cubes to folder `./files/`
 - create database Postgresql with spatial exension (POSTGIS)
 - set environment variable: 
-  - URL_GEOSERVER = link geoserver with port (127.0.0.1:8080)
+  - GEOSERVER_URL = link geoserver with port (127.0.0.1:8080)
+  - GEOSERVER_USER = user to authentication in geoserver
+  - GEOSERVER_PASSWORD = password to authentication in geoserver
   - ENVIRONMENT = env ([DevelopmentConfig, ProductionConfig, TestingConfig])
   - KEYSYSTEM = key to hash crypto
   - PATH_BASE_GEOSERVER = base path to layers geoserver (file:///home/data/cubes)
