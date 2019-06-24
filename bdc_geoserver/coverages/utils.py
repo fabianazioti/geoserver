@@ -32,19 +32,18 @@ def generate_props_datastore():
     properties_path = Path('{}/properties_files/'.format(os.path.dirname(__file__)))
     f = open('{}/datastore.properties'.format(properties_path), 'w+')
 
-    content_datastore_properties = '''SPI=org.geotools.data.postgis.PostgisNGDataStoreFactory 
-host={} 
-port={} 
-database={}  
-schema=public 
-user={} 
-passwd={} 
-Loose\ bbox=true 
-Estimated\ extends=false 
-validate\ connections=true  
-Connection\ timeout=10 
-preparedStatements=true 
-    '''.format(
+    content_datastore_properties = '''SPI=org.geotools.data.postgis.PostgisNGDataStoreFactory
+host={}
+port={}
+database={}
+schema=public
+user={}
+passwd={}
+Loose\ bbox=true
+Estimated\ extends=false
+validate\ connections=true
+Connection\ timeout=10
+preparedStatements=true'''.format(
             os.environ.get('POSTGRES_HOST'), os.environ.get('POSTGRES_PORT'), os.environ.get('POSTGRES_DATABASE'),
             os.environ.get('POSTGRES_USER'), os.environ.get('POSTGRES_PASSWORD'))
     f.write(content_datastore_properties)

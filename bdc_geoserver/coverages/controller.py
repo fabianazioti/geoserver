@@ -19,10 +19,11 @@ class CoverageController(Resource):
             Endpoint responsável listar as coverage store de um workspace
             """
             layers = CoverageBusiness.get_coverages(workspace)
-
+            coverages = layers['coverageStores']['coverageStore'] if type(layers['coverageStores']) != str else []
+            
             return return_response({
                 "success": True,
-                "coverageStore": layers['coverageStores']['coverageStore']
+                "coverageStore": coverages
             }, 200)
 
         except Exception as e:
