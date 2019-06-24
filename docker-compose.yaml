@@ -17,6 +17,7 @@ services:
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_HOST=postgis
       - POSTGRES_PORT=5432
+      - SUFFIX_NAME_CUBE=_MEDIAN
     volumes:
       - ./files:/data/bdc/files
     ports:

@@ -109,4 +109,5 @@ venv.bak/
 
 # local test
 files/
+/bdc_geoserver/coverages/properties_files/indexer.properties
 /bdc_geoserver/coverages/properties_files/datastore.properties

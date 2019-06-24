@@ -6,6 +6,7 @@ from copy import deepcopy
 
 from bdc_geoserver.coverages.services import CoverageServices
 from bdc_geoserver.coverages.utils import replaceList
+from bdc_geoserver.coverages.utils import generate_props_indexer
 from bdc_geoserver.utils.base_sql import db
 
 class CoverageBusiness():
@@ -19,6 +20,9 @@ class CoverageBusiness():
     def publish(cls, data):
         datastore = replaceList(data['datastore'], ['.', '-', '_', '.', '~', '@', '!', '/'], '')
         layer = replaceList(data['layer'], ['.', '-', '_', '.', '~', '@', '!', '/'], '')
+
+        ''' gerando arquivo indexer.properties '''
+        generate_props_indexer(deepcopy(layer))
 
         '''
             Copiar arquivos listados (.properties) para dentro da pasta do mosaico
@@ -87,5 +91,5 @@ class CoverageBusiness():
                 os.remove('{}/{}'.format(datacube_path, filename))
 
         ''' Excluindo tabela do banco - gerado pelo geoserver '''
-        db.engine.execute('DROP TABLE IF EXISTS {}'.format(layer))
+        db.engine.execute('DROP TABLE IF EXISTS "{}{}"'.format(layer, os.environ.get('SUFFIX_NAME_CUBE', '_MEDIAN')))
         return True
