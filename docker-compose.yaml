@@ -5,7 +5,7 @@ services:
     build: ./
     container_name: bdc-geoserver
     environment:
-      - GEOSERVER_URL=geoserver:8080
+      - GEOSERVER_URL=http://geoserver:8080/geoserver
       - GEOSERVER_USER=admin
       - GEOSERVER_PASSWORD=geoserver
       - ENVIRONMENT=DevelopmentConfig
@@ -44,13 +44,11 @@ services:
   postgis:
     hostname: postgis
     container_name: postgis
-    image: kartoza/postgis
+    image: mdillon/postgis
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASS=postgres
-      - POSTGRES_DBNAME=bdc
+      - POSTGRES_PASSWORD=postgres
     volumes:
-      - postgres-data:/var/lib/postgresql
+      - postgres-data:/var/lib/postgresql/data   
     ports:
       - "5433:5432"
     networks:
