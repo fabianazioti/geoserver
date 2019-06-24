@@ -1,4 +1,3 @@
-import jwt
 import json
 import os
 import shutil
