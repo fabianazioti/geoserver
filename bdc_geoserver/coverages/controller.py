@@ -5,7 +5,7 @@ from flask_restplus import Resource, marshal
 from bdc_geoserver.coverages import ns
 from bdc_geoserver.coverages.business import CoverageBusiness
 from bdc_geoserver.coverages.parsers import validate
-from bdc_geoserver.utils.helpers import return_response
+from bdc_geoserver.helpers import return_response
 
 api = ns
 

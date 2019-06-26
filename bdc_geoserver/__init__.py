@@ -4,7 +4,7 @@ import os
 
 from flask import Flask
 from flask_bcrypt import Bcrypt
-from bdc_geoserver.utils.base_sql import db
+from bdc_geoserver.base_sql import db
 from bdc_geoserver.coverages.utils import generate_props_datastore
 
 flask_bcrypt = Bcrypt()

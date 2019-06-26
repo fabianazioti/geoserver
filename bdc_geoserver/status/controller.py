@@ -2,7 +2,7 @@ import os
 from flask_restplus import Resource
 
 from bdc_geoserver.status import ns
-from bdc_geoserver.utils.helpers import return_response
+from bdc_geoserver.helpers import return_response
 
 api = ns
 

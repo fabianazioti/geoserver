@@ -6,8 +6,8 @@ from copy import deepcopy
 
 from bdc_geoserver.coverages.services import CoverageServices
 from bdc_geoserver.coverages.utils import generate_props_indexer
-from bdc_geoserver.utils.helpers import replaceList
-from bdc_geoserver.utils.base_sql import db
+from bdc_geoserver.helpers import replaceList
+from bdc_geoserver.base_sql import db
 
 class CoverageBusiness():
 
