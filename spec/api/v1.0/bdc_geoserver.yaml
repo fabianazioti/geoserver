@@ -18,7 +18,7 @@ tags:
     description: "Status services"
     
 paths:
-  /:
+  /geoserver/status:
     get:
       tags:
         - "status"
@@ -36,7 +36,7 @@ paths:
                   success:
                     type: boolean
 
-  /coverages/{workspace}:
+  /geoserver/coverages/{workspace}:
     get:
       tags:
         - "coverages"
@@ -62,7 +62,7 @@ paths:
                   success:
                     type: boolean
 
-  /coverages/{workspace}/{coveragestore}/{coverage}:
+  /geoserver/coverages/{workspace}/{coveragestore}/{coverage}:
     delete:
       tags:
         - "coverages"
@@ -89,7 +89,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ResponseStatus"
   
-  /coverages/:
+  /geoserver/coverages/:
     post:
       tags:
         - "coverages"
