@@ -19,6 +19,7 @@ class ProductionConfig(Config):
     DEVELOPMENT = False
 
 class DevelopmentConfig(Config):
+    DEBUG = True
     DEVELOPMENT = True
 
 class TestingConfig(Config):
