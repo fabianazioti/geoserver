@@ -14,8 +14,28 @@ info:
 tags:
   - name: "coverages"
     description: "Manager coverages (mosaicPyramid) in Geoserver"
+  - name: "status"
+    description: "Status services"
     
 paths:
+  /:
+    get:
+      tags:
+        - "status"
+      summary: "Status application"
+      description: "return status of application"
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  success:
+                    type: boolean
+
   /coverages/{workspace}:
     get:
       tags:

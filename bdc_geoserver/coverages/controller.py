@@ -5,12 +5,12 @@ from flask_restplus import Resource, marshal
 from bdc_geoserver.coverages import ns
 from bdc_geoserver.coverages.business import CoverageBusiness
 from bdc_geoserver.coverages.parsers import validate
-from bdc_geoserver.coverages.utils import return_response
+from bdc_geoserver.utils.helpers import return_response
 
-bdc_geoserver = ns
+api = ns
 
-@bdc_geoserver.route('/<workspace>')
-@bdc_geoserver.route('/<workspace>/<coveragestore>/<coverage>')
+@api.route('/<workspace>')
+@api.route('/<workspace>/<coveragestore>/<coverage>')
 class CoverageController(Resource):
 
     def get(self, workspace, coveragestore=None, coverage=None):
@@ -53,7 +53,7 @@ class CoverageController(Resource):
             }, 500)
             
 
-@bdc_geoserver.route('/')
+@api.route('/')
 class CoverageController(Resource):
 
     def post(self):
