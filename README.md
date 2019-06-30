@@ -40,7 +40,7 @@ pip3 install -r requirements.txt
   - POSTGRES_PASSWORD = password database
   - POSTGRES_HOST = host database
   - POSTGRES_PORT = port database
-  - SUFFIX_NAME_CUBE = title suffix (applied when not publish all bands) - (_MEDIAN)
+  - SUFFIX_NAME_CUBE = title suffix (applied when not publish all bands) - (_MEDIAN_RGB)
 
 ```
 python3 manager.py run
