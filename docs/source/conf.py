@@ -18,9 +18,9 @@ sys.setrecursionlimit(1500)
 
 # -- Project information -----------------------------------------------------
 
-project = 'geoserver'
+project = 'BDC Geoserver'
 copyright = '2019, National Institute for Space Research'
-author = 'BDC User'
+author = 'BDC - INPE'
 
 # The full version, including alpha/beta/rc tags
 release = '1.0'

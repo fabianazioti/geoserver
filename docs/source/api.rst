@@ -3,13 +3,8 @@
 API Reference
 =============
 
-bdc_geoserver main
--------------------
-.. automodule:: bdc_geoserver
-   :members:
-
-bdc_geoserver controller
--------------------
+bdc_geoserver Controllers
+-------------------------
 
 This is documentation of Geoserver controller spec
 
@@ -17,9 +12,4 @@ This is documentation of Geoserver controller spec
    :members:
 
 .. automodule:: bdc_geoserver.status.controller
-   :members:
-
-bdc_geoserver utils
---------------
-.. automodule:: bdc_geoserver.utils.helpers
    :members:
