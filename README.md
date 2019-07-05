@@ -6,6 +6,7 @@ API to publish layers and cubes in Geoserver
 - [`bdc_geoserver`](./bdc_geoserver) python scripts to manage the layers in Geoserver
 - [`spec`](./spec) Spec of API bdc_geoserver
 - [`docs`](./docs) Documentation of bdc_geoserver
+- [`tests`](./tests) Tests of API bdc_geoserver
 
 ## Installation
 
