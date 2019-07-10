@@ -7,7 +7,7 @@
     "build": "redoc-cli bundle api/v1.0/bdc_geoserver.yaml --output dist/index.html"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "redoc": "^2.0.0-rc.8-1",
     "redoc-cli": "^0.8.4"
