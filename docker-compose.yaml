@@ -4,6 +4,7 @@ services:
   bdc-geoserver:
     build: ./
     container_name: bdc-geoserver
+    privileged: true
     environment:
       - GEOSERVER_URL=http://geoserver:8080/geoserver
       - GEOSERVER_USER=admin
@@ -17,7 +18,7 @@ services:
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_HOST=postgis
       - POSTGRES_PORT=5432
-      - SUFFIX_NAME_CUBE=_MEDIAN
+      - SUFFIX_NAME_CUBE=_MEDIAN_RGB
     volumes:
       - ./files:/data/bdc/files
     ports:

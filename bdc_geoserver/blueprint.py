@@ -4,7 +4,7 @@ from flask_restplus import Api
 from bdc_geoserver.coverages.controller import api as coverage_ns
 from bdc_geoserver.status.controller import api as status_ns
 
-blueprint = Blueprint('geoserver', __name__)
+blueprint = Blueprint('geoserver', __name__, url_prefix='/geoserver')
 
 api = Api(blueprint, doc=False)
 
