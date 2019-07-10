@@ -15,7 +15,7 @@ class CoverageController(APIResource):
 
     def get(self, workspace, coveragestore=None, coverage=None):
         """
-        Endpoint responsável listar as coverage store de um workspace
+        List of coverages store for a workspace in geoserver
         """
         layers = CoverageBusiness.get_coverages(workspace)
         coverages = layers['coverageStores']['coverageStore'] if type(layers['coverageStores']) != str else []
@@ -27,7 +27,7 @@ class CoverageController(APIResource):
     
     def delete(self, workspace, coveragestore, coverage):
         """
-        Endpoint responsável despublicar um layer
+        Unpublish a layer/coverage in geoserver
         """
         status = CoverageBusiness.unpublish(workspace, coveragestore, coverage)
         if not status:
@@ -40,11 +40,11 @@ class CoverageController(APIResource):
             
 
 @api.route('/')
-class CoverageController(APIResource):
+class CoveragesController(APIResource):
 
     def post(self):
         """
-        Endpoint responsável publicar um mosaico (rasters)
+        Publish a layer/image_mosaic in geoserver
         """
         data, status = validate(request.json, 'publish_raster')
         if status is False:

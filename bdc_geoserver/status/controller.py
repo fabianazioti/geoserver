@@ -8,7 +8,7 @@ class StatusController(APIResource):
     
     def get(self):
         """
-        Endpoint responsável por retornar o status da aplicação
+        Returns application status
         """
         return {
             "status": "Running",
