@@ -4,8 +4,8 @@ from pathlib import Path
 
 def generate_props_datastore():
     '''
-        Gerando arquivo datastore.properties com as informações de conexão com o banco
-        -> gerar arquivo e salvar em /bdc_geoserver/coverages/properties_files
+        Generating indexer.properties file with database connection information
+        -> generate file and save to /bdc_geoserver/coverages/properties_files
     '''
     properties_path = Path('{}/properties_files/'.format(os.path.dirname(__file__)))
     f = open('{}/datastore.properties'.format(properties_path), 'w+')
@@ -29,8 +29,8 @@ preparedStatements=true'''.format(
 
 def generate_props_indexer(cube_name):
     '''
-        Gerando arquivo indexer.properties com as informações de conexão com o banco
-        -> gerar arquivo e salvar em /bdc_geoserver/coverages/properties_files
+        Generating indexer.properties file with with the columns of the table in the database
+        -> generate file and save to /bdc_geoserver/coverages/properties_files
     '''
     properties_path = Path('{}/properties_files/'.format(os.path.dirname(__file__)))
     f = open('{}/indexer.properties'.format(properties_path), 'w+')
