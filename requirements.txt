@@ -19,3 +19,4 @@ psycopg2-binary==2.8.3
 Sphinx==2.1.2
 pytest==5.0.1
 pytest-cov==2.7.1
+git+https://github.com/brazil-data-cube/bdc-readthedocs-theme@master
