@@ -1,5 +1,5 @@
 from bdc_geoserver.status import ns
-from bdc_geoserver.helpers import APIResource
+from bdc_core.utils.flask import APIResource
 
 api = ns
 

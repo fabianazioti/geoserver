@@ -6,8 +6,8 @@ from copy import deepcopy
 
 from bdc_geoserver.coverages.services import CoverageServices
 from bdc_geoserver.coverages.utils import generate_props_indexer
-from bdc_geoserver.helpers import replaceList
 from bdc_geoserver.base_sql import db
+from bdc_core.utils.python import replace_by_list
 
 class CoverageBusiness():
 
@@ -18,8 +18,8 @@ class CoverageBusiness():
 
     @classmethod
     def publish(cls, data):
-        datastore = replaceList(data['datastore'], ['.', '-', '_', '.', '~', '@', '!', '/'], '')
-        layer = replaceList(data['layer'], ['.', '-', '_', '.', '~', '@', '!', '/'], '')
+        datastore = replace_by_list(data['datastore'], ['.', '-', '_', '.', '~', '@', '!', '/'], '')
+        layer = replace_by_list(data['layer'], ['.', '-', '_', '.', '~', '@', '!', '/'], '')
 
         ''' generate file indexer.properties '''
         generate_props_indexer(deepcopy(layer))
