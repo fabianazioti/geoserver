@@ -70,3 +70,19 @@ latex_elements = {
     'preamble': '',
     'figure_align': 'htbp'
 } 
+
+#
+# BDC theme configuration
+#
+
+import bdc_theme
+
+html_theme_path = bdc_theme.html_theme_path()
+html_theme = 'bdc_theme'
+
+extensions.append("bdc_theme")
+
+html_theme_options = {
+    # Set the name of the project to appear in the sidebar
+    "project_nav_name": project,
+}

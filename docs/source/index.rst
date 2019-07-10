@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 Welcome to geoserver's documentation!
-================================
+=====================================
 
 Welcome to Geoserver documentation. Get started with :ref:`installation` and then run application with the :ref:`running`
 
