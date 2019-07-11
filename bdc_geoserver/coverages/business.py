@@ -77,12 +77,7 @@ class CoverageBusiness():
         ''' unpublished and removing a coverage '''
         
         unpublish = CoverageServices.unpublish(workspace, layer)
-        if not unpublish:
-            raise Exception('Error unpublish layer')
-
         remove = CoverageServices.remove(workspace, datastore, layer)
-        if not remove:
-            raise Exception('Error remove layer')
         
         ''' Removing configuration files '''
         datacube_path = Path('{}/{}/'.format(os.environ.get('PATH_CUBES_FILE'), layer))

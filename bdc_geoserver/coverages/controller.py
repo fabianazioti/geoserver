@@ -1,6 +1,7 @@
-import os
+import os, json
 from flask import request
 from flask_restplus import marshal
+from werkzeug.exceptions import InternalServerError, BadRequest
 
 from bdc_geoserver.coverages import ns
 from bdc_geoserver.coverages.business import CoverageBusiness
@@ -21,7 +22,6 @@ class CoverageController(APIResource):
         coverages = layers['coverageStores']['coverageStore'] if type(layers['coverageStores']) != str else []
         
         return {
-            "success": True,
             "coverageStore": coverages
         }
     
@@ -31,10 +31,9 @@ class CoverageController(APIResource):
         """
         status = CoverageBusiness.unpublish(workspace, coveragestore, coverage)
         if not status:
-            raise Exception('Error unpublish mosaic!')
+            raise InternalServerError('Error unpublish mosaic!')
 
         return {
-            "success": True,
             "message": "Mosaic unpublish!"
         }
             
@@ -48,13 +47,12 @@ class CoveragesController(APIResource):
         """
         data, status = validate(request.json, 'publish_raster')
         if status is False:
-            return return_response(data, 400)
+            raise BadRequest(json.dumps(data))
 
         status = CoverageBusiness.publish(data)
         if not status:
-            raise Exception('Error publishing mosaic!')
+            raise InternalServerError('Error publishing mosaic!')
 
         return {
-            "success": True,
             "message": "Mosaic published!"
         }
