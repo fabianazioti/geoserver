@@ -1,19 +1,9 @@
 import os
-
-from flask_cors import CORS
 from flask_script import Manager
 
-from bdc_geoserver import create_app
-from bdc_geoserver.blueprint import blueprint
-from bdc_geoserver.config import get_settings
-
-app, db = create_app(get_settings(os.environ.get('ENVIRONMENT', 'DevelopmentConfig')))
-app.register_blueprint(blueprint)
+from bdc_geoserver import app
 
 manager = Manager(app)
-
-CORS(app, resorces={r'/d/*': {"origins": '*'}})
-
 
 @manager.command
 def run():
@@ -25,6 +15,11 @@ def run():
 
     app.run(HOST, PORT)
 
+@manager.command
+def test():
+    """Run the unit tests."""
+    import pytest
+    pytest.main(["-s", "tests/"])
 
 if __name__ == '__main__':
     manager.run()

@@ -1,22 +1,19 @@
-import json
-import logging
 import os
-
 from flask import Flask
-from flask_bcrypt import Bcrypt
+from flask_cors import CORS
+
 from bdc_geoserver.base_sql import db
+from bdc_geoserver.blueprint import blueprint
+from bdc_geoserver.config import get_settings
 from bdc_geoserver.coverages.utils import generate_props_datastore
 
-flask_bcrypt = Bcrypt()
-
-def create_app(config_name):
+def create_app(config):
     app = Flask(__name__)
-
+    
     with app.app_context():
-        app.config.from_object(config_name)
+        app.config.from_object(config)
         app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-        app.wsgi_app = PrefixMiddleware(app.wsgi_app, prefix='/geoserver')
+        app.register_blueprint(blueprint)
 
         # DB
         db.init_app(app)
@@ -24,24 +21,8 @@ def create_app(config_name):
 
         # generate infos to connect database by os.environ
         generate_props_datastore()
-
-        flask_bcrypt.init_app(app)
         
     return app, db
+app, db = create_app(get_settings(os.environ.get('ENVIRONMENT', 'DevelopmentConfig')))
 
-
-class PrefixMiddleware(object):
-
-    def __init__(self, app, prefix=''):
-        self.app = app
-        self.prefix = prefix
-
-    def __call__(self, environ, start_response):
-
-        if environ['PATH_INFO'].startswith(self.prefix):
-            environ['PATH_INFO'] = environ['PATH_INFO'][len(self.prefix):]
-            environ['SCRIPT_NAME'] = self.prefix
-            return self.app(environ, start_response)
-        else:
-            start_response('404', [('Content-Type', 'text/plain')])
-            return ["This url does not belong to the app.".encode()]
+CORS(app, resorces={r'/d/*': {"origins": '*'}})
