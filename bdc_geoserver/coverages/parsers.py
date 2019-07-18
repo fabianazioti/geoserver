@@ -1,6 +1,6 @@
+from datetime import datetime
 from cerberus import Validator
 
-from datetime import datetime
 
 def publish_raster():
     return {
@@ -15,7 +15,7 @@ def publish_raster():
 
 def validate(data, type_schema):
     schema = eval('{}()'.format(type_schema))
-    
+
     v = Validator(schema)
     if not v.validate(data):
         return v.errors, False
