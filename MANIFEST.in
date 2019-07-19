@@ -1,0 +1,2 @@
+graft bdc_geoserver
+global-exclude *.py[cod] __pycache__ *.so

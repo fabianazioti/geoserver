@@ -1,14 +1,15 @@
-import os, json
+import os
+import json
 from flask import request
-from flask_restplus import marshal
 from werkzeug.exceptions import InternalServerError, BadRequest
 
+from bdc_core.utils.flask import APIResource
 from bdc_geoserver.coverages import ns
 from bdc_geoserver.coverages.business import CoverageBusiness
 from bdc_geoserver.coverages.parsers import validate
-from bdc_core.utils.flask import APIResource
 
 api = ns
+
 
 @api.route('/<workspace>')
 @api.route('/<workspace>/<coveragestore>/<coverage>')
@@ -19,12 +20,13 @@ class CoverageController(APIResource):
         List of coverages store for a workspace in geoserver
         """
         layers = CoverageBusiness.get_coverages(workspace)
-        coverages = layers['coverageStores']['coverageStore'] if type(layers['coverageStores']) != str else []
-        
+        coverages = layers['coverageStores']['coverageStore'] if type(
+            layers['coverageStores']) != str else []
+
         return {
             "coverageStore": coverages
         }
-    
+
     def delete(self, workspace, coveragestore, coverage):
         """
         Unpublish a layer/coverage in geoserver
@@ -36,7 +38,7 @@ class CoverageController(APIResource):
         return {
             "message": "Mosaic unpublish!"
         }
-            
+
 
 @api.route('/')
 class CoveragesController(APIResource):
