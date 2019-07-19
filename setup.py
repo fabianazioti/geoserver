@@ -11,5 +11,6 @@ setup(
     author_email='admin@admin.com',
     license="MIT",
     packages=find_packages(),
-    url='https://github.com/brazil-data-cube/',
+    url='https://github.com/brazil-data-cube/geoserver',
+    include_package_data=True,
 )
