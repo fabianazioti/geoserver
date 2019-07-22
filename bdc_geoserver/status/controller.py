@@ -12,6 +12,5 @@ class StatusController(APIResource):
         Returns application status
         """
         return {
-            "status": "Running",
-            "success": True
+            "status": "Running"
         }
