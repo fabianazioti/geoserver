@@ -29,7 +29,7 @@ pip3 install -r requirements.txt
 
 - copy files with cubes to folder `./files/`
 - create database Postgresql with spatial exension (POSTGIS)
-- set environment variable: 
+- set environment variable:
   - GEOSERVER_URL = link geoserver with port (127.0.0.1:8080)
   - GEOSERVER_USER = user to authentication in geoserver
   - GEOSERVER_PASSWORD = password to authentication in geoserver
@@ -49,7 +49,42 @@ python3 manager.py run
 ```
 
 ### Running with docker
+You can configure the environment to run through Docker containers. In order to do that, build the image brazildatacube/geoserver:0.1:
 ```
-docker-compose build
-docker-compose up -d
+docker build --tag brazildatacube/geoserver:0.1 -f docker/Dockerfile .
+```
+
+After that, you can run the application with command:
+
+```
+docker run --interactive \
+           --tty \
+           --detach \
+           --name geoserver_app \
+           --publish 5000:5000 \
+           brazildatacube/geoserver:0.1
+```
+
+or with compose:
+```
+TAG=0.1 docker-compose up -d
+```
+
+You can also generate the documentation on http://localhost:5001:
+```
+docker run --rm \
+           --interactive \
+           --name geoserver_app_docs \
+           --publish 5001:5001 \
+           brazildatacube/geoserver:0.1 \
+           python3 manage.py docs --serve
+```
+
+And run the tests:
+```
+docker run --rm \
+           --interactive \
+           --name geoserver_app_test \
+           brazildatacube/geoserver:0.1 \
+           python3 manage.py test
 ```

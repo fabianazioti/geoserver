@@ -2,7 +2,7 @@ version: '3'
 
 services:
   bdc-geoserver:
-    build: ./
+    image: brazildatacube/api-geoserver:${TAG}
     container_name: bdc-geoserver
     privileged: true
     environment:
@@ -20,9 +20,9 @@ services:
       - POSTGRES_PORT=5432
       - SUFFIX_NAME_CUBE=_MEDIAN_RGB
     volumes:
-      - ./files:/data/bdc/files
+      - ./../files:/data/bdc/files
     ports:
-      - "5000:5000"
+      - "5001:5000"
     restart: always
     networks:
       - bdc_net_geoserver
@@ -37,7 +37,7 @@ services:
       - MAXIMUM_MEMORY=4G
     volumes:
       - geoserver-data:/opt/geoserver/data_dir
-      - ./files:/home/data/cubes
+      - ./../files:/home/data/cubes
     ports:
       - "8081:8080"
     networks:
@@ -50,7 +50,7 @@ services:
     environment:
       - POSTGRES_PASSWORD=postgres
     volumes:
-      - postgres-data:/var/lib/postgresql/data   
+      - postgres-data:/var/lib/postgresql/data
     ports:
       - "5433:5432"
     networks:
