@@ -45,9 +45,7 @@ def generate_props_indexer(cube_name):
 ElevationAttribute=elevation
 Schema=*the_geom:Polygon,location:String,ingestion:java.util.Date,elevation:Integer
 PropertyCollectors=TimestampFileNameExtractorSPI[timeregex](ingestion)
-CoverageNameCollectorSPI=org.geotools.gce.imagemosaic.namecollector.FileNameRegexNameCollectorSPI:regex=({})[0-9 -_]+[0-9]'''.format(cube_name)
-    content_indexer_properties += '{2}'
-    content_indexer_properties += ('({})'.format(
-        os.environ.get('SUFFIX_NAME_CUBE', '_MEDIAN')))
+CoverageNameCollectorSPI=org.geotools.gce.imagemosaic.namecollector.FileNameRegexNameCollectorSPI:regex=({})'''.format(
+        os.environ.get('SUFFIX_NAME_CUBE', '_MEDIAN'))
     f.write(content_indexer_properties)
     f.close()
