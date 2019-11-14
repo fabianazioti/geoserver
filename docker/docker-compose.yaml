@@ -2,7 +2,7 @@ version: '3'
 
 services:
   bdc-geoserver:
-    image: brazildatacube/api-geoserver:${TAG}
+    image: bdc-geoserver
     container_name: bdc-geoserver
     privileged: true
     environment:
@@ -20,7 +20,7 @@ services:
       - POSTGRES_PORT=5432
       - SUFFIX_NAME_CUBE=_
     volumes:
-      - /home/fabiana/data:/data/bdc/files
+      - /home/fabiana/volumes/geoserver:/data/bdc/files
     ports:
       - "5001:5000"
     restart: always
@@ -37,7 +37,7 @@ services:
       - MAXIMUM_MEMORY=16G
     volumes:
       - geoserver-data:/opt/geoserver/data_dir
-      - /home/fabiana/data:/home/data/cubes
+      - /home/fabiana/volumes/geoserver:/home/data/cubes
     ports:
       - "8081:8080"
     networks:

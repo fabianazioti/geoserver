@@ -46,6 +46,6 @@ ElevationAttribute=elevation
 Schema=*the_geom:Polygon,location:String,ingestion:java.util.Date,elevation:Integer
 PropertyCollectors=TimestampFileNameExtractorSPI[timeregex](ingestion)
 CoverageNameCollectorSPI=org.geotools.gce.imagemosaic.namecollector.FileNameRegexNameCollectorSPI:regex=({})'''.format(
-        os.environ.get('SUFFIX_NAME_CUBE', '_MEDIAN'))
+        os.environ.get('SUFFIX_NAME_CUBE'))
     f.write(content_indexer_properties)
     f.close()
